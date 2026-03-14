@@ -1,3 +1,5 @@
+import { useI18n } from '../i18n'
+
 interface GalleryImage {
   src: string
   alt: string
@@ -23,11 +25,13 @@ const IMAGES: GalleryImage[] = [
 ]
 
 export default function Gallery() {
+  const { t } = useI18n()
+
   return (
     <section id="gallery" className="bg-stone-100 py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-serif mb-3">Recent Work</h2>
+          <h2 className="text-3xl font-serif mb-3">{t.gallery.headline}</h2>
           <div className="h-1 w-20 bg-emerald-700 mx-auto rounded-full" />
         </div>
 
