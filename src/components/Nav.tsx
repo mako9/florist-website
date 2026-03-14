@@ -1,5 +1,6 @@
 import { config } from '../config'
 import { localeOptions, useI18n } from '../i18n'
+import type { Locale } from '../i18n'
 
 export default function Nav() {
   const { t, locale, setLocale } = useI18n()
