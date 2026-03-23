@@ -1,34 +1,9 @@
-import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import type { ReactNode } from 'react'
+import { I18nContext } from './i18nContext'
+import type { Locale, Translations } from './i18nContext'
 
-export type Locale = 'de' | 'en'
-
-export interface Translations {
-  nav: {
-    services: string
-    gallery: string
-    contact: string
-    language: string
-  }
-  hero: {
-    title: string
-    subtitle: string
-  }
-  services: {
-    headline: string
-    items: Array<{ title: string; description: string }>
-  }
-  gallery: {
-    headline: string
-  }
-  contact: {
-    headline: string
-    description: string
-  }
-  footer: {
-    copyright: string
-    allRights: string
-  }
-}
+export type { Locale, Translations } from './i18nContext'
 
 const TRANSLATIONS: Record<Locale, Translations> = {
   de: {
@@ -120,14 +95,6 @@ const TRANSLATIONS: Record<Locale, Translations> = {
   },
 }
 
-interface I18nContextValue {
-  locale: Locale
-  setLocale: (locale: Locale) => void
-  t: Translations
-}
-
-const I18nContext = createContext<I18nContextValue | null>(null)
-
 const LOCALE_STORAGE_KEY = 'florist-website-locale'
 
 function isLocale(value: unknown): value is Locale {
@@ -157,16 +124,3 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }
-
-export function useI18n() {
-  const ctx = useContext(I18nContext)
-  if (!ctx) {
-    throw new Error('useI18n must be used inside I18nProvider')
-  }
-  return ctx
-}
-
-export const localeOptions: Array<{ code: Locale; label: string }> = [
-  { code: 'de', label: 'Deutsch' },
-  { code: 'en', label: 'English' },
-]
