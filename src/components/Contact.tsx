@@ -1,6 +1,6 @@
 import { MapPin, Phone, Mail, type LucideIcon } from 'lucide-react'
 import { config } from '../config'
-import { useI18n } from '../i18n'
+import { useI18n } from '../useI18n'
 
 interface ContactItem {
   Icon: LucideIcon
