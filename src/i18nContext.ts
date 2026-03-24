@@ -27,7 +27,17 @@ export interface Translations {
   footer: {
     copyright: string
     allRights: string
+    impressum: string
   }
+  impressum: {
+      title: string
+      subtitle: string
+      legalInfo: string
+      disclaimer: string
+      disclaimerText: string
+      linksDisclaimer: string
+      linksDisclaimerText: string
+    }
 }
 
 export interface I18nContextValue {

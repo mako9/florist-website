@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { config } from '../config'
 import { localeOptions, useI18n } from '../useI18n'
 import type { Locale } from '../i18n'
@@ -6,21 +7,25 @@ export default function Nav() {
   const { t, locale, setLocale } = useI18n()
 
   const links = [
-    { label: t.nav.services, href: '#services' },
-    { label: t.nav.gallery, href: '#gallery' },
-    { label: t.nav.contact, href: '#contact' },
+    { label: t.nav.services, id: 'services' },
+    { label: t.nav.gallery, id: 'gallery' },
+    { label: t.nav.contact, id: 'contact' },
   ]
+
+  function scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <nav className="flex justify-between items-center px-6 py-5 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
-      <a href="#" className="text-2xl font-serif tracking-widest uppercase text-stone-800">
+      <Link to="/" className="text-2xl font-serif tracking-widest uppercase text-stone-800">
         {config.site.name}
-      </a>
+      </Link>
       <div className="hidden md:flex gap-8 items-center font-medium text-sm uppercase tracking-wider">
-        {links.map(({ label, href }) => (
-          <a key={href} href={href} className="hover:text-emerald-700 transition-colors">
+        {links.map(({ label, id }) => (
+          <button key={id} onClick={() => scrollTo(id)} className="hover:text-emerald-700 transition-colors cursor-pointer">
             {label}
-          </a>
+          </button>
         ))}
         <label className="flex items-center gap-2 text-xs text-stone-500 uppercase tracking-wider">
           <span>{t.nav.language}:</span>
